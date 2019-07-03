@@ -7,7 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
 			messages: [],
 			doc: {
 				name: '',
-				owner: ''
+				format: '',
+				dateCreated: new Date(),
+				_id: '',
+				fileUrl: '',
+				rejected: false,
+				done: false,
+				applicant: {
+					name: ''
+				},
+				currentOfficer: {
+					name: ''
+				},
+				history: []
 			}
 		},
 		mounted: function () {
@@ -27,7 +39,7 @@ if (annyang) {
 	// recognition.maxAlternatives = 1;
 
 	// recognition.onspeechend = function () {
-		// recognition.stop();
+	// recognition.stop();
 	// }
 
 	var synthesis = window.speechSynthesis
@@ -66,87 +78,87 @@ if (annyang) {
 
 	// recognition.onresult = function (ev) {
 
-		// let recogtext = ev.results[ev.results.length - 1][0].transcript
+	// let recogtext = ev.results[ev.results.length - 1][0].transcript
 
-		// conversationVue.messages.push({
-		// 	from: 'user',
-		// 	text: recogtext
-		// })
+	// conversationVue.messages.push({
+	// 	from: 'user',
+	// 	text: recogtext
+	// })
 
-		// console.log(recogtext);
-
-
-
-		// if (processApplication) {
-		// 	let macmsg = {
-		// 		from: 'machine',
-		// 		text: ''
-		// 	}
-
-		// 	recognition.stop()
-
-		// 	switch (applicationState) {
-		// 		case 0:
-		// 			applicationParameters.name = recogtext;
-
-		// 			macmsg.text = `from when do want to go on leave?`
-		// 			conversationVue.messages.push(macmsg)
-		// 			utterance.text = `आप छुट्टी कबसे लेना चाहते है?`
-		// 			utterance.voice = lekha
-
-		// 			synthesis.speak(utterance)
-		// 			applicationState++
-		// 			break;
-		// 		case 1:
-		// 			applicationParameters.from = recogtext;
-
-		// 			macmsg.text = `upto when do want to go on leave?`
-		// 			conversationVue.messages.push(macmsg)
-		// 			utterance.text = `आप छुट्टी कब तक लेना चाहते है?`
-		// 			utterance.voice = lekha
-
-		// 			synthesis.speak(utterance)
-		// 			applicationState++
-		// 			break;
-		// 		case 2:
-		// 			applicationParameters.to = recogtext;
-
-		// 			macmsg.text = `what is the nature of leave?`
-		// 			conversationVue.messages.push(macmsg)
-		// 			utterance.text = `छुट्टी किस प्रकार की है?`
-		// 			utterance.voice = lekha
-
-		// 			synthesis.speak(utterance)
-		// 			applicationState++
-		// 			break;
-		// 		case 3:
-		// 			applicationParameters.nature = recogtext;
-
-		// 			macmsg.text = `what is the purpose of leave?`
-		// 			conversationVue.messages.push(macmsg)
-		// 			utterance.text = `आप छुट्टी क्यों लेना चाहते है?`
-		// 			utterance.voice = lekha
-
-		// 			synthesis.speak(utterance)
-		// 			applicationState++
-		// 			break;
-		// 		case 4:
-		// 			applicationParameters.purpose = recogtext;
-		// 			window.location.href = `http://localhost:3000/leaveapplicationprint?name=${applicationParameters.name}&from=${applicationParameters.from}&to=${applicationParameters.to}&nature=${applicationParameters.nature}&purpose=${applicationParameters.purpose}`
-		// 			recognition.stop()
-		// 			break;
+	// console.log(recogtext);
 
 
-		// 		default:
-		// 			break
 
-		// 	}
-		// 	recognition.start()
+	// if (processApplication) {
+	// 	let macmsg = {
+	// 		from: 'machine',
+	// 		text: ''
+	// 	}
+
+	// 	recognition.stop()
+
+	// 	switch (applicationState) {
+	// 		case 0:
+	// 			applicationParameters.name = recogtext;
+
+	// 			macmsg.text = `from when do want to go on leave?`
+	// 			conversationVue.messages.push(macmsg)
+	// 			utterance.text = `आप छुट्टी कबसे लेना चाहते है?`
+	// 			utterance.voice = lekha
+
+	// 			synthesis.speak(utterance)
+	// 			applicationState++
+	// 			break;
+	// 		case 1:
+	// 			applicationParameters.from = recogtext;
+
+	// 			macmsg.text = `upto when do want to go on leave?`
+	// 			conversationVue.messages.push(macmsg)
+	// 			utterance.text = `आप छुट्टी कब तक लेना चाहते है?`
+	// 			utterance.voice = lekha
+
+	// 			synthesis.speak(utterance)
+	// 			applicationState++
+	// 			break;
+	// 		case 2:
+	// 			applicationParameters.to = recogtext;
+
+	// 			macmsg.text = `what is the nature of leave?`
+	// 			conversationVue.messages.push(macmsg)
+	// 			utterance.text = `छुट्टी किस प्रकार की है?`
+	// 			utterance.voice = lekha
+
+	// 			synthesis.speak(utterance)
+	// 			applicationState++
+	// 			break;
+	// 		case 3:
+	// 			applicationParameters.nature = recogtext;
+
+	// 			macmsg.text = `what is the purpose of leave?`
+	// 			conversationVue.messages.push(macmsg)
+	// 			utterance.text = `आप छुट्टी क्यों लेना चाहते है?`
+	// 			utterance.voice = lekha
+
+	// 			synthesis.speak(utterance)
+	// 			applicationState++
+	// 			break;
+	// 		case 4:
+	// 			applicationParameters.purpose = recogtext;
+	// 			window.location.href = `http://localhost:3000/leaveapplicationprint?name=${applicationParameters.name}&from=${applicationParameters.from}&to=${applicationParameters.to}&nature=${applicationParameters.nature}&purpose=${applicationParameters.purpose}`
+	// 			recognition.stop()
+	// 			break;
 
 
-		// }
-		// recognition.stop()
-		// recognition.start()
+	// 		default:
+	// 			break
+
+	// 	}
+	// 	recognition.start()
+
+
+	// }
+	// recognition.stop()
+	// recognition.start()
 	// }
 
 
@@ -154,48 +166,100 @@ if (annyang) {
 	// Add our commands to annyang
 
 	annyang.addCommands({
-		hello: function () {
-			// alert('Hello world!')
-			let msg = {
-				from: 'machine',
-				text: 'Hi!'
-			}
-			conversationVue.messages.push(msg)
-		},
-		'show me :doc': function (doc) {
-			doc = doc.toLowerCase()
-			fetch(`/api/document/${doc}`)
-				.then(res => res.json())
-				.then(data => {
-
-
-					if (data.error) {
-						let macmsg = {
-							from: 'machine',
-							text: ''
-						}
-						macmsg.text = "Sorry, document not found."
-						utterance.text = macmsg.text
-						utterance.voice = lekha
-
-						synthesis.speak(utterance)
-						conversationVue.messages.push(macmsg)
-					} else {
-						conversationVue.doc = data
-						docmodal.open()
-					}
-
-					// alert(JSON.stringify(data))
-				})
-				.catch(err => {
-					console.error(err)
-				})
-		},
+		'hello': sayHello,
+		'hi': sayHello,
+		'namaste': sayHello,
+		'namaskar': sayHello,
+		'show me :doc': findDoc,
+		':doc kahan hai': findDoc,
 		'(fill) :type application (bharo)': leaveApplication,
 		'mujhe chutti chahiye': leaveApplication,
+		'(i) (need) (a) holiday': leaveApplication,
 	})
 
-	function leaveApplication (type) {
+
+	function sayHello() {
+		// alert('Hello world!')
+		let msg = {
+			from: 'machine',
+			text: 'नमस्कार!'
+			// text: 'Hi!'
+		}
+
+		conversationVue.messages.push(msg)
+		utterance.text = msg.text
+		utterance.voice = lekha
+
+		synthesis.speak(utterance)
+	}
+
+	function findDoc(doc) {
+		doc = doc.toLowerCase()
+
+		fetch(`http://192.168.1.2:3000/api/documents/`)
+			.then(res => res.json())
+			.then(documents => {
+				let filtereddocs = documents.filter(docu => {
+					let docname = docu.name
+					// console.log(docname)
+					// console.log(doc)
+					return docname.toLowerCase() == doc
+				})
+				// console.log(documents)
+				// console.log(doc)
+				// console.log(filtereddocs)
+				return filtereddocs
+			})
+			.then(filtereddocs => {
+				if (filtereddocs.length) {
+					fetch(`http://192.168.1.2:3000/api/document/${filtereddocs[0]._id}`)
+						.then(res => res.json())
+						.then(data => {
+							annyang.abort()
+
+							if (data.error) {
+								let macmsg = {
+									from: 'machine',
+									text: ''
+								}
+								macmsg.text = "Sorry, document not found."
+								utterance.text = `डॉक्यूमेंट नहीं मिला`
+								utterance.voice = lekha
+
+								synthesis.speak(utterance)
+								conversationVue.messages.push(macmsg)
+							} else {
+								conversationVue.doc = data
+								utterance.text = `डॉक्यूमेंट ${data.currentOfficer.name} sir के पास है `
+								utterance.voice = lekha
+
+								synthesis.speak(utterance)
+								docmodal.open()
+							}
+
+							// alert(JSON.stringify(data))
+						}).catch(err => {
+							console.error(err)
+						})
+				} else {
+					let macmsg = {
+						from: 'machine',
+						text: ''
+					}
+					macmsg.text = "Sorry, document not found."
+					utterance.text = `डॉक्यूमेंट नहीं मिला `
+					utterance.voice = lekha
+
+					synthesis.speak(utterance)
+					conversationVue.messages.push(macmsg)
+				}
+			})
+
+			.catch(err => {
+				console.error(err)
+			})
+	}
+	function leaveApplication(type) {
 
 		console.log(type)
 
@@ -212,13 +276,13 @@ if (annyang) {
 		utterance.text = `आपका नाम क्या है?`
 		annyang.abort()
 		synthesis.speak(utterance)
-		setTimeout(()=>{annyang.resume()},1500)
+		setTimeout(() => { annyang.resume() }, 1500)
 
 	}
 
 	annyang.addCallback('result', function (phrases) {
 		// console.log('I think the user said: ', phrases[0])
-		
+
 		// console.log(
 		// 	'But then again, it could be any of the following: ',
 		// 	phrases
@@ -238,7 +302,7 @@ if (annyang) {
 
 		console.log(recogtext);
 
-		annyang.abort()
+
 
 		if (processApplication) {
 			let macmsg = {
@@ -246,7 +310,7 @@ if (annyang) {
 				text: ''
 			}
 
-			
+			annyang.abort()
 
 			switch (applicationState) {
 				case 0:
@@ -295,7 +359,7 @@ if (annyang) {
 					break;
 				case 4:
 					applicationParameters.purpose = recogtext;
-					window.location.href = `http://localhost:3000/leaveapplicationprint?name=${applicationParameters.name}&from=${applicationParameters.from}&to=${applicationParameters.to}&nature=${applicationParameters.nature}&purpose=${applicationParameters.purpose}`
+					window.location.href = `http://localhost:3000/leaveapplicationprint?name=${applicationParameters.name}&from=${applicationParameters.fromdate}&to=${applicationParameters.todate}&nature=${applicationParameters.nature}&purpose=${applicationParameters.purpose}`
 					recognition.stop()
 					break;
 
@@ -304,7 +368,7 @@ if (annyang) {
 					break
 
 			}
-			setTimeout(()=>{annyang.resume()},1500)
+			setTimeout(() => { annyang.resume() }, 1500)
 
 
 		}
@@ -321,6 +385,7 @@ if (annyang) {
 	SpeechKITT.setStylesheet(
 		'/css/flat-pumpkin.css'
 	)
+	SpeechKITT.setInstructionsText('Listening...')
 	// SpeechKITT.displayRecognizedSentence({
 	// 	newState: true
 	// })
