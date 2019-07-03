@@ -1,0 +1,46 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  title Annyang Test
+script(src='https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js')
+script.
+  if (annyang) {
+  // Add our commands to annyang
+  annyang.addCommands({
+  hello: function() {
+  alert('Hello world!')
+  },
+  'show me :doc': function(doc) {
+  doc = doc.toLowerCase()
+  fetch(`/api/document/${doc}`)
+  .then(res => res.json())
+  .then(data => {
+  alert(JSON.stringify(data))
+  SpeechKITT.setRecognizedSentence(
+  'fetching data'
+  )
+  })
+  .catch(err => {
+  console.error(err)
+  })
+  }
+  })
+  annyang.addCallback('result', function(phrases) {
+  console.log('I think the user said: ', phrases[0])
+  console.log(
+  'But then again, it could be any of the following: ',
+  phrases
+  )
+  })
+  // Tell KITT to use annyang
+  SpeechKITT.annyang()
+  // Define a stylesheet for KITT to use
+  SpeechKITT.setStylesheet(
+  'https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat-pumpkin.css'
+  )
+  // Render KITT's interface
+  SpeechKITT.vroom()
+  }

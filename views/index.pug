@@ -1,0 +1,39 @@
+extends components/layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/chat.css")
+block content
+    h3.center.blue-grey-text.text-darken-4 Hello
+
+    .messages#messages
+        ul
+            li.message(v-for="message in messages" v-bind:class="{'from right-align': message.from == 'machine', 'to': message.from == 'user'}")
+                span(v-bind:class="{'blue white-text': message.from == 'machine', 'white black-text': message.from == 'user'}") {{ message.text }}
+    
+        #docmodal.modal
+            .modal-content
+                h3 {{ doc.name }}
+                p {{ doc.owner }}
+
+        //- #messagemodal.modal
+            .modal-content
+                .container    
+                    .row
+                    form.col.s12
+                        .row
+                        .input-field.col.s6
+                            input#first_name.validate(type='text')
+                            label(for='first_name') First Name
+                        .input-field.col.s6
+                            input#last_name.validate(type='text')
+                            label(for='last_name') Last Name
+                        .input-field.col.s12
+                            input#password.validate(type='password')
+                            label(for='password') Password
+                        .input-field.col.s12
+                            input#email.validate(type='text')
+                            label(for='email') Leave Reason
+
+
+block scripts
+    script(src="/js/init/index.js")

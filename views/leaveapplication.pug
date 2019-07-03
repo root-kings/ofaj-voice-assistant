@@ -1,0 +1,25 @@
+extends components/layout.pug
+
+block styles
+
+block content
+    h3.center.blue-grey-text.text-darken-4 Leave Application
+    .container    
+        .row
+        form.col.s12
+            .row
+            .input-field.col.s6
+                input#first_name.validate(type='text')
+                label(for='first_name') First Name
+            .input-field.col.s6
+                input#last_name.validate(type='text')
+                label(for='last_name') Last Name
+            .input-field.col.s12
+                input#password.validate(type='password')
+                label(for='password') Password
+            .input-field.col.s12
+                input#email.validate(type='text')
+                label(for='email') Leave Reason
+
+
+block scripts
