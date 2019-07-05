@@ -173,7 +173,7 @@ if (annyang) {
 		'show me :doc': findDoc,
 		':doc kahan hai': findDoc,
 		'(fill) :type application (bharo)': leaveApplication,
-		'mujhe chutti chahiye': leaveApplication,
+		'mujhe chutti (chahiye) (leni hai)': leaveApplication,
 		'(i) (need) (a) holiday': leaveApplication,
 	})
 
@@ -189,14 +189,14 @@ if (annyang) {
 		conversationVue.messages.push(msg)
 		utterance.text = msg.text
 		utterance.voice = lekha
-
+		annyang.abort()
 		synthesis.speak(utterance)
 	}
 
 	function findDoc(doc) {
 		doc = doc.toLowerCase()
 
-		fetch(`http://192.168.1.2:3000/api/documents/`)
+		fetch(`http://59.99.238.23:3000/api/documents/`)
 			.then(res => res.json())
 			.then(documents => {
 				let filtereddocs = documents.filter(docu => {
@@ -212,7 +212,7 @@ if (annyang) {
 			})
 			.then(filtereddocs => {
 				if (filtereddocs.length) {
-					fetch(`http://192.168.1.2:3000/api/document/${filtereddocs[0]._id}`)
+					fetch(`http://59.99.238.23:3000/api/document/${filtereddocs[0]._id}`)
 						.then(res => res.json())
 						.then(data => {
 							annyang.abort()
@@ -230,7 +230,7 @@ if (annyang) {
 								conversationVue.messages.push(macmsg)
 							} else {
 								conversationVue.doc = data
-								utterance.text = `डॉक्यूमेंट ${data.currentOfficer.name} sir के पास है `
+								utterance.text = `${data.name} ka file ${data.currentOfficer.name} sir के पास है `
 								utterance.voice = lekha
 
 								synthesis.speak(utterance)

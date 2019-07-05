@@ -5,12 +5,21 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Leave Application
-    body
-        p Name: #{name}
-        p Personal number: 12345678
 
-        p From: #{fromdate}  -  To: #{todate}
+        include components/styles.pug
+    body.blue-grey
 
-        p Nature of leave: #{nature} [CL/PL/HPL]
+        .container
+            .row
+                .col.s12
+                    .card-panel
 
-        p Purpose: #{purpose}
+                        h4.center Leave Application
+                        p Name: #{name}
+                        p Personal number: 12345678
+
+                        p From: #{fromdate}  -  To: #{todate}
+
+                        p Nature of leave: #{nature} [CL/EL/HPL]
+
+                        p Purpose: #{purpose}
