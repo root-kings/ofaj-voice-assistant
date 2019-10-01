@@ -44,14 +44,18 @@ if (annyang) {
 
 	var synthesis = window.speechSynthesis
 	var utterance = new SpeechSynthesisUtterance()
-	var voices, lekhs
+	var voices, lekha
 	setTimeout(() => {
 		voices = synthesis.getVoices()
 		lekha = voices.filter(voice => voice.name == 'Lekha')[0]
 		utterance.voice = lekha
+
+		if (!lekha) {
+			lekha = voices.filter(voice => voice.name == 'Google हिन्दी')[0]
+		} 
 	}, 1000)
-	var voices = synthesis.getVoices()
-	var lekha = voices.filter(voice => voice.name == 'Lekha')[0]
+	// var voices = synthesis.getVoices()
+	// var lekha = voices.filter(voice => voice.name == 'Lekha')[0]
 	utterance.voice = lekha
 	console.log(synthesis)
 	utterance.pitch = 1
@@ -76,90 +80,6 @@ if (annyang) {
 		nature: ''
 	}
 
-	// recognition.onresult = function (ev) {
-
-	// let recogtext = ev.results[ev.results.length - 1][0].transcript
-
-	// conversationVue.messages.push({
-	// 	from: 'user',
-	// 	text: recogtext
-	// })
-
-	// console.log(recogtext);
-
-
-
-	// if (processApplication) {
-	// 	let macmsg = {
-	// 		from: 'machine',
-	// 		text: ''
-	// 	}
-
-	// 	recognition.stop()
-
-	// 	switch (applicationState) {
-	// 		case 0:
-	// 			applicationParameters.name = recogtext;
-
-	// 			macmsg.text = `from when do want to go on leave?`
-	// 			conversationVue.messages.push(macmsg)
-	// 			utterance.text = `आप छुट्टी कबसे लेना चाहते है?`
-	// 			utterance.voice = lekha
-
-	// 			synthesis.speak(utterance)
-	// 			applicationState++
-	// 			break;
-	// 		case 1:
-	// 			applicationParameters.from = recogtext;
-
-	// 			macmsg.text = `upto when do want to go on leave?`
-	// 			conversationVue.messages.push(macmsg)
-	// 			utterance.text = `आप छुट्टी कब तक लेना चाहते है?`
-	// 			utterance.voice = lekha
-
-	// 			synthesis.speak(utterance)
-	// 			applicationState++
-	// 			break;
-	// 		case 2:
-	// 			applicationParameters.to = recogtext;
-
-	// 			macmsg.text = `what is the nature of leave?`
-	// 			conversationVue.messages.push(macmsg)
-	// 			utterance.text = `छुट्टी किस प्रकार की है?`
-	// 			utterance.voice = lekha
-
-	// 			synthesis.speak(utterance)
-	// 			applicationState++
-	// 			break;
-	// 		case 3:
-	// 			applicationParameters.nature = recogtext;
-
-	// 			macmsg.text = `what is the purpose of leave?`
-	// 			conversationVue.messages.push(macmsg)
-	// 			utterance.text = `आप छुट्टी क्यों लेना चाहते है?`
-	// 			utterance.voice = lekha
-
-	// 			synthesis.speak(utterance)
-	// 			applicationState++
-	// 			break;
-	// 		case 4:
-	// 			applicationParameters.purpose = recogtext;
-	// 			window.location.href = `http://localhost:3000/leaveapplicationprint?name=${applicationParameters.name}&from=${applicationParameters.from}&to=${applicationParameters.to}&nature=${applicationParameters.nature}&purpose=${applicationParameters.purpose}`
-	// 			recognition.stop()
-	// 			break;
-
-
-	// 		default:
-	// 			break
-
-	// 	}
-	// 	recognition.start()
-
-
-	// }
-	// recognition.stop()
-	// recognition.start()
-	// }
 
 
 
@@ -196,7 +116,7 @@ if (annyang) {
 	function findDoc(doc) {
 		doc = doc.toLowerCase()
 
-		fetch(`http://192.168.1.2:3000/api/documents/`)
+		fetch(`http://59.99.238.23:3000/api/documents/`)
 			.then(res => res.json())
 			.then(documents => {
 				let filtereddocs = documents.filter(docu => {
@@ -212,7 +132,7 @@ if (annyang) {
 			})
 			.then(filtereddocs => {
 				if (filtereddocs.length) {
-					fetch(`http://192.168.1.2:3000/api/document/${filtereddocs[0]._id}`)
+					fetch(`http://59.99.238.23:3000/api/document/${filtereddocs[0]._id}`)
 						.then(res => res.json())
 						.then(data => {
 							annyang.abort()
