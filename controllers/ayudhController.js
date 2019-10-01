@@ -12,3 +12,15 @@ exports.documentDetails_get = (req, res) => {
 
     })
 }
+
+exports.printApplication = (req, res) => {
+	let sendableObject = req.query || {
+		name:'Tusar Pandey',
+		number:'',
+		fromdate:'2019-07-03',
+		todate:'2019-07-07',
+		purpose:'Going to hometown',
+		nature:'PL'
+	}
+	res.render('leaveapplicationprint',sendableObject)
+}

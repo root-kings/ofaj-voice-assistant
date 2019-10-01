@@ -93,7 +93,7 @@ if (annyang) {
 		'show me :doc': findDoc,
 		':doc kahan hai': findDoc,
 		'(fill) :type application (bharo)': leaveApplication,
-		'mujhe chutti chahiye': leaveApplication,
+		'mujhe chutti (chahiye) (leni hai)': leaveApplication,
 		'(i) (need) (a) holiday': leaveApplication,
 	})
 
@@ -109,7 +109,7 @@ if (annyang) {
 		conversationVue.messages.push(msg)
 		utterance.text = msg.text
 		utterance.voice = lekha
-
+		annyang.abort()
 		synthesis.speak(utterance)
 	}
 
@@ -150,7 +150,7 @@ if (annyang) {
 								conversationVue.messages.push(macmsg)
 							} else {
 								conversationVue.doc = data
-								utterance.text = `डॉक्यूमेंट ${data.currentOfficer.name} sir के पास है `
+								utterance.text = `${data.name} ka file ${data.currentOfficer.name} sir के पास है `
 								utterance.voice = lekha
 
 								synthesis.speak(utterance)
